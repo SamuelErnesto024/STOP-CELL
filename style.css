@@ -1,0 +1,987 @@
+/* STOPCELL PREMIUM STYLESHEET */
+
+:root {
+    --red-main: #ff0000;
+    --red-glow: #ff4d4d;
+    --black-pure: #000000;
+    --black-soft: #0a0a0a;
+    --black-card: #121212;
+    --white: #ffffff;
+    --gray-text: #888888;
+    --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* RESET GENERAL */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background-color: var(--black-pure);
+    /* Gradiente radial de fondo + capa de partículas animadas */
+    background: 
+        radial-gradient(circle at center, #1a0000 0%, #000000 80%),
+        repeating-linear-gradient(0deg, rgba(255, 0, 0, 0.03) 0px, rgba(255, 0, 0, 0.03) 1px, transparent 1px, transparent 2px);
+    background-size: 100% 100%, 100% 3px;
+    color: var(--white);
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* SCROLLBAR ROJA */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--black-pure); }
+::-webkit-scrollbar-thumb { background: var(--red-main); border-radius: 5px; }
+
+/* PRELOADER ANIMADO */
+#loader {
+    position: fixed;
+    width: 100%; height: 100%;
+    background: var(--black-pure);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    transition: opacity 0.8s ease;
+}
+
+.loader-logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3.5rem;
+    color: var(--white);
+    letter-spacing: 5px;
+}
+
+.loader-logo span { color: var(--red-main); text-shadow: 0 0 15px var(--red-main); }
+
+.scanner {
+    width: 200px;
+    height: 2px;
+    background: var(--red-main);
+    box-shadow: 0 0 15px var(--red-main);
+    margin-bottom: 20px;
+    animation: scan 2s infinite ease-in-out;
+}
+
+@keyframes scan {
+    0%, 100% { transform: scaleX(0.1); opacity: 0.2; }
+    50% { transform: scaleX(1); opacity: 1; }
+}
+
+/* --- NUEVA BARRA DE NAVEGACIÓN PREMIUM --- */
+
+.navbar {
+    position: fixed;
+    top: 0; 
+    width: 100%;
+    /* Efecto de cristal oscuro */
+    background: rgba(0, 0, 0, 0.8) !important;
+    backdrop-filter: blur(15px); 
+    border-bottom: 2px solid var(--red-main);
+    padding: 12px 0; /* Un poco más delgada para mayor elegancia */
+    z-index: 5000;
+}
+
+/* Estilo para los enlaces del menú */
+.nav-link {
+    background: transparent;
+    border: none;
+    color: var(--white) !important;
+    padding: 10px 20px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    position: relative;
+    transition: all 0.3s ease;
+    opacity: 0.8; /* Ligeramente opacos para resaltar el hover */
+}
+
+/* La línea roja que nace del centro al pasar el mouse */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--red-main);
+    box-shadow: 0 0 10px var(--red-main);
+    transition: all 0.4s ease;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover {
+    color: var(--red-main) !important;
+    opacity: 1;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+.nav-link:hover::after {
+    width: 80%; /* La línea se expande */
+}
+
+/* Estilo para cuando la página está seleccionada */
+.nav-link.active {
+    color: var(--red-main) !important;
+    opacity: 1;
+}
+
+.nav-link.active::after {
+    width: 100%;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+}
+
+/* --- LOGO STOPCELL PREMIUM --- */
+.logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.2rem; /* Un poco más grande */
+    font-weight: 900;
+    letter-spacing: 4px;
+    position: relative;
+    color: var(--white);
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    /* Brillo constante suave */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+/* Efecto de brillo rojo en la palabra CELL o cuando pasas el mouse */
+.logo .red {
+    color: var(--red-main);
+    text-shadow: 0 0 15px var(--red-main), 0 0 30px var(--red-main);
+    animation: neon-pulse 2s infinite alternate;
+}
+
+/* Animación de pulso para el brillo rojo */
+@keyframes neon-pulse {
+    from {
+        filter: brightness(1);
+        text-shadow: 0 0 10px var(--red-main);
+    }
+    to {
+        filter: brightness(1.3);
+        text-shadow: 0 0 20px var(--red-main), 0 0 35px var(--red-main);
+    }
+}
+
+/* Interacción al pasar el mouse sobre todo el logo */
+.logo:hover {
+    transform: scale(1.05);
+    letter-spacing: 6px; /* Se expande un poco al tocarlo */
+}
+
+.red { color: var(--red-main); }
+
+.nav-link {
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--white);
+    padding: 10px 25px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: var(--transition);
+    margin: 0 5px;
+}
+
+.nav-link.active, .nav-link:hover {
+    border-color: var(--red-main);
+    box-shadow: 0 0 15px var(--red-main);
+    color: var(--red-main);
+}
+
+/* SECCIONES Y ANIMACIÓN DE DESVANECIMIENTO */
+.brand-section {
+    display: none;
+    padding: 150px 5% 80px;
+    min-height: 100vh;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.brand-section.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hero-banner {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.hero-banner h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 4.5rem;
+    color: var(--red-main);
+    text-transform: uppercase;
+}
+
+/* GRID DE PRODUCTOS */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.card {
+    background: var(--black-card);
+    border: 1px solid #1a1a1a;
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    border-color: var(--red-main);
+    box-shadow: 0 15px 40px rgba(255, 0, 0, 0.2);
+}
+
+.img-container {
+    height: 220px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-container img {
+    max-width: 100%;
+    max-height: 100%;
+    transition: transform 0.5s ease;
+}
+
+/* --- TARJETAS DE PRODUCTO TECNOLÓGICAS --- */
+.card {
+    background: linear-gradient(145deg, #0f0f0f, #050505) !important;
+    border: 1px solid #1a1a1a !important;
+    border-radius: 0px !important; /* Quitamos el redondeado común */
+    padding: 30px;
+    text-align: center;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    
+    /* Corte tipo armadura en las esquinas */
+    clip-path: polygon(0 0, 90% 0, 100% 10%, 100% 100%, 10% 100%, 0 90%);
+}
+
+/* Línea de escaneo roja que aparece en la tarjeta al pasar el mouse */
+.card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.05), transparent);
+    transition: 0.5s;
+    pointer-events: none;
+}
+
+.card:hover {
+    transform: translateY(-10px) scale(1.02);
+    border-color: var(--red-main) !important;
+    /* Brillo interno y externo */
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.2), inset 0 0 15px rgba(255, 0, 0, 0.1) !important;
+}
+
+.card:hover::after {
+    left: 100%;
+}
+
+/* Ajuste del título del producto dentro de la tarjeta */
+.card h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    margin-top: 15px;
+    color: var(--white);
+    transition: 0.3s;
+}
+
+.card:hover h3 {
+    color: var(--red-main);
+    text-shadow: 0 0 10px var(--red-main);
+}
+
+.price {
+    font-size: 2.5rem;
+    color: var(--white);
+    font-family: 'Orbitron', sans-serif;
+    margin: 15px 0;
+    font-weight: 900;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    position: relative;
+    display: inline-block;
+}
+
+/* Añade un pequeño símbolo de "$" flotante o un brillo detrás */
+.price::before {
+    content: 'USD';
+    font-size: 0.7rem;
+    color: var(--red-main);
+    vertical-align: middle;
+    margin-right: 8px;
+    letter-spacing: 1px;
+}
+
+/* --- BOTÓN DE ACCIÓN STOPCELL --- */
+.buy-now {
+    width: 100%;
+    padding: 15px;
+    background: transparent !important; /* Fondo transparente para resaltar el borde */
+    color: var(--white);
+    border: 2px solid var(--red-main) !important;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    z-index: 1;
+    /* Corte en las esquinas para look tecnológico */
+    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+}
+
+/* El efecto de "Carga de Energía" que llena el botón al pasar el mouse */
+.buy-now::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--red-main);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    z-index: -1;
+}
+
+.buy-now:hover::before {
+    left: 0; /* Llena el botón de rojo */
+}
+
+.buy-now:hover {
+    color: var(--black-pure);
+    box-shadow: 0 0 25px var(--red-main);
+    transform: scale(1.05);
+}
+
+.buy-now:active {
+    transform: scale(0.95); /* Efecto de click */
+}
+
+.buy-now:hover {
+    background: var(--white);
+    color: var(--red-main);
+}
+
+/* --- FOOTER TIPO TERMINAL STOPCELL --- */
+.footer {
+    background: #000000 !important;
+    border-top: 3px solid var(--red-main);
+    padding: 80px 5% 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efecto de luz roja que emana desde el suelo del footer */
+.footer::before {
+    content: "";
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 100px;
+    background: var(--red-main);
+    filter: blur(80px);
+    opacity: 0.15;
+    pointer-events: none;
+}
+
+.footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Estilo para los encabezados del footer */
+.footer h4 {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--red-main);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+}
+
+/* Enlaces del footer tipo lista de datos */
+.footer-link {
+    display: block;
+    color: var(--gray-text);
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.footer-link:hover {
+    color: var(--white);
+    padding-left: 10px; /* Se desplaza un poco al tocarlo */
+    border-left: 2px solid var(--red-main);
+}
+
+/* Barra legal final */
+.legal {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid #1a1a1a;
+    color: #444;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto 40px;
+}
+
+.legal {
+    text-align: center;
+    color: var(--gray-text);
+    font-size: 0.8rem;
+}
+
+/* MEDIA QUERIES PARA MÓVILES */
+@media (max-width: 768px) {
+    .hero-banner h2 { font-size: 2.5rem; }
+    .navbar .container { flex-direction: column; gap: 20px; }
+}
+.ig-btn-animated {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    color: white !important;
+    padding: 10px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(220, 39, 67, 0.4);
+    animation: pulse-ig 2s infinite;
+}
+
+.ig-btn-animated:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+    box-shadow: 0 6px 20px rgba(220, 39, 67, 0.6);
+}
+
+@keyframes pulse-ig {
+    0% { box-shadow: 0 0 0 0 rgba(220, 39, 67, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(220, 39, 67, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(220, 39, 67, 0); }
+}
+.phone-link {
+    color: #ff0000; /* El color rojo de tu marca */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.phone-link:hover {
+    color: #ffffff; /* Cambia a blanco al pasar el mouse */
+    text-shadow: 0 0 8px rgba(255, 0, 0, 0.8);
+}
+.phone-link {
+    color: #25d366; /* Color verde oficial de WhatsApp */
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+}
+
+.phone-link:hover {
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(37, 211, 102, 0.8);
+    transform: translateY(-2px);
+}
+
+/* Opcional: añade un puntito verde de "en línea" al lado */
+.phone-link::before {
+    content: "●";
+    margin-right: 5px;
+    font-size: 10px;
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+.phone-link {
+    color: #25d366; /* Verde WhatsApp */
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center; /* Centra el icono con el texto */
+    transition: all 0.3s ease;
+}
+
+.phone-link:hover {
+    color: #ffffff;
+    filter: drop-shadow(0 0 5px #25d366);
+    transform: scale(1.05);
+}
+.email-link {
+    color: #ffffff; /* Color blanco por defecto */
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+}
+
+.email-link:hover {
+    color: #ff0000; /* Cambia al rojo de tu marca al pasar el mouse */
+    filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.5));
+    transform: translateX(5px); /* Se mueve un poco a la derecha */
+}
+/* ELIMINAR TODAS LAS ANIMACIONES DE IMÁGENES Y TARJETAS */
+
+/* 1. Forzar que las imágenes no se muevan ni escalen */
+.card img, 
+.img-container img, 
+.brand-section img {
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+}
+
+/* 2. Evitar que el contenedor oculte partes o cree efectos de zoom */
+.img-container {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 3. Eliminar el movimiento de las tarjetas al pasar el mouse (hover) */
+.card:hover {
+    transform: none !important;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important; /* Sombra sutil y estática */
+}
+
+/* 4. Si tenías un carrusel o slider automático, esto lo detiene */
+.product-grid, 
+.hero-banner {
+    animation: none !important;
+    transform: none !important;
+}
+/* Tamaño uniforme para todas las imágenes */
+.img-container {
+    width: 100%;
+    height: 250px; /* Altura fija para que todas las filas queden alineadas */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9; /* Fondo suave para fotos transparentes */
+    overflow: hidden;
+}
+
+.img-container img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain; /* Ajusta la imagen sin cortarla */
+}
+
+/* Forzar que las tarjetas tengan el mismo alto */
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+#btn-top {
+    display: none; /* Se oculta por defecto */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    background-color: #ff0000; /* Rojo de tu marca */
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%;
+    font-size: 18px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+#btn-top:hover {
+    background-color: #000;
+}
+#welcome-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #000;
+    display: flex;          /* Activa el modo flexible */
+    flex-direction: column; /* Pone los elementos uno debajo de otro */
+    justify-content: center;/* Centra verticalmente */
+    align-items: center;    /* Centra horizontalmente */
+    z-index: 99999;
+    text-align: center;     /* Asegura que el texto interno esté centrado */
+}
+
+.logo-container { position: relative; animation: pulse 2s infinite; }
+.main-logo { width: 500px; position: relative; z-index: 2; }
+.logo-glow {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 300px; height: 300px; background: rgba(255, 0, 0, 0.5);
+    filter: blur(60px); border-radius: 50%; z-index: 1;
+}
+
+.slogan {
+    color: white; 
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 5px; 
+    margin: 30px 0 50px; 
+    font-size: 1.5rem; /* Aumentado de 1.2 a 1.5 */
+    text-shadow: 0 0 15px rgba(255, 0, 0, 0.7); /* Brillo rojo sutil en las letras */
+}
+.enter-btn {
+    background: transparent; 
+    color: #ff0000; 
+    border: 3px solid #ff0000; /* Borde un poco más grueso */
+    padding: 20px 60px;        /* Más espacio interno */
+    font-size: 1.4rem;         /* Letra más grande */
+    font-weight: bold; 
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif; 
+    transition: 0.4s;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.enter-btn:hover { background: #ff0000; color: white; box-shadow: 0 0 20px #ff0000; }
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+/* --- CIRCULOS MÁS GRANDES Y COMPLETOS PARA STOPCELL --- */
+
+.img-container img {
+    /* 1. Tamaño aumentado */
+    width: 260px !important; 
+    height: 260px !important; 
+    
+    /* 2. Hacemos que la imagen se vea completa sin recortar nada */
+    object-fit: contain !important; 
+    border-radius: 50% !important;
+    
+    /* 3. Limpieza de fondo y efectos */
+    mix-blend-mode: lighten !important; 
+    background-color: transparent !important;
+    filter: contrast(1.1) brightness(1.1) !important;
+    
+    /* 4. Brillo rojo y borde */
+    border: 3px solid var(--red-main) !important;
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.8) !important;
+    
+    display: block !important;
+    margin: 0 auto !important;
+}
+
+.img-container {
+    height: 280px !important; /* Ajustamos el contenedor para que quepa el círculo grande */
+    background-color: transparent !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.card {
+    background-color: var(--black-pure) !important;
+    /* Ajustamos el padding para que el círculo grande no choque con los bordes */
+    padding: 15px !important; 
+}
+
+.product-card {
+    background: transparent !important;
+    border: none !important;
+}
+/* --- ELIMINAR FONDOS BLANCOS DE IMÁGENES --- */
+.product-card img {
+    /* Este comando hace que el blanco se vuelva transparente sobre fondo negro */
+    mix-blend-mode: multiply; 
+    
+    /* Filtro para que el producto no se vea opaco */
+    filter: contrast(1.2) brightness(1.1);
+    
+    /* Aseguramos que la imagen no tenga un fondo propio */
+    background-color: transparent !important;
+}
+
+/* Forzamos que la tarjeta sea negra para que la mezcla funcione */
+.product-card {
+    background-color: #000 !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+.img-container::after {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: var(--red-main);
+    box-shadow: 0 0 15px var(--red-main);
+    opacity: 0;
+    transition: none;
+}
+
+.card:hover .img-container::after {
+    animation: scan-photo 1.5s linear infinite;
+    opacity: 1;
+}
+
+@keyframes scan-photo {
+    0% { top: 0%; }
+    100% { top: 100%; }
+}
+.card:hover h3 {
+    color: var(--red-main);
+    text-shadow: 0 0 10px var(--red-main), 0 0 20px var(--red-main);
+    transition: 0.3s;
+}
+.buy-now {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--red-main);
+}
+
+.buy-now:hover {
+    box-shadow: 0 0 20px var(--red-main);
+    transform: scale(1.02);
+}
+body {
+    background: radial-gradient(circle at center, #1a0000 0%, #000000 70%);
+}
+.card::before {
+    content: "NUEVO";
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--red-main);
+    color: white;
+    font-size: 0.7rem;
+    padding: 5px 10px;
+    border-radius: 50px;
+    font-family: 'Orbitron';
+    z-index: 10;
+}
+.logo:hover {
+    animation: glitch 0.3s cubic-bezier(.25,.46,.45,.94) both infinite;
+}
+
+@keyframes glitch {
+    0% { transform: translate(0); text-shadow: 2px -2px #ff0000, -2px 2px #00ffff; }
+    25% { transform: translate(-2px, 2px); }
+    50% { transform: translate(2px, -2px); text-shadow: -2px 2px #ff0000, 2px -2px #00ffff; }
+    100% { transform: translate(0); }
+}
+.card:hover {
+    border-color: var(--red-main) !important;
+    box-shadow: 0 0 10px var(--red-main), inset 0 0 10px var(--red-main);
+    background: linear-gradient(145deg, #0a0a0a, #1a0000); /* Fondo con ligero tono rojizo */
+}
+.buy-now {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+}
+
+.card:hover .buy-now {
+    opacity: 1;
+    transform: translateY(0);
+}
+.img-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.img-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -100%;
+    width: 50%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(30deg);
+    transition: 0.5s;
+}
+
+.card:hover .img-container::before {
+    left: 150%; /* El brillo cruza toda la imagen */
+}
+.nav-link {
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: var(--red-main);
+    transition: all 0.6s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+    left: 0;
+}
+/* --- EFECTO PARTICULAS DE ENERGÍA --- */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Creamos puntos rojos muy pequeños con gradientes radiales */
+    background-image: 
+        radial-gradient(circle, var(--red-main) 1px, transparent 1px),
+        radial-gradient(circle, var(--red-main) 1px, transparent 1px);
+    background-size: 80px 80px;
+    background-position: 0 0, 40px 40px;
+    opacity: 0.15; /* Muy sutil para no distraer */
+    z-index: -1; /* Va detrás de todo */
+    animation: moveParticles 20s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes moveParticles {
+    from { transform: translateY(0); }
+    to { transform: translateY(1000px); } /* Las partículas caen */
+}
+/* Animación de entrada para las tarjetas */
+.card {
+    animation: reveal 0.8s cubic-bezier(0, 1, 0, 1) backwards;
+}
+
+/* Retraso para que aparezcan en cascada (una tras otra) */
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.2s; }
+.card:nth-child(3) { animation-delay: 0.3s; }
+.card:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes reveal {
+    0% { opacity: 0; transform: translateY(50px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+/* --- BARRA DE CONTACTO FLOTANTE STOPCELL --- */
+.floating-contact {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.float-icon {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 12px;
+    color: white;
+    text-decoration: none;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.8rem;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    border-right: none;
+    border-radius: 30px 0 0 30px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    width: 50px; /* Ancho inicial (solo icono) */
+    overflow: hidden;
+}
+
+/* Color específico por red */
+/* Colores específicos por red en tu CSS */
+.whatsapp:hover { background: #25d366; box-shadow: 0 0 20px rgba(37, 211, 102, 0.5); border-color: #25d366; }
+.instagram:hover { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); box-shadow: 0 0 20px rgba(220, 39, 67, 0.5); border-color: transparent; }
+.email:hover { background: var(--red-main); box-shadow: 0 0 20px rgba(255, 0, 0, 0.5); border-color: var(--red-main); }
+
+.float-icon span {
+    margin-right: 15px;
+    opacity: 0;
+    transition: 0.3s;
+    white-space: nowrap;
+}
+
+.float-icon:hover {
+    width: 160px; /* Se expande al pasar el mouse */
+}
+
+.float-icon:hover span {
+    opacity: 1;
+}
+
+.float-icon i {
+    font-size: 1.5rem;
+    min-width: 25px;
+    text-align: center;
+}
