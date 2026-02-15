@@ -19,15 +19,20 @@
         <i class="fab fa-instagram"></i>
     </a>
 </div>
-<div id="welcome-screen">
-    <div class="welcome-content">
-        <div class="logo-container">
-            <img src="Logo stopcell.jpeg" alt="STOPCELL Logo" class="main-logo">
-            <div class="logo-glow"></div>
+<<div id="welcome-screen">
+    <div class="valentine-logo-wrapper">
+        <div class="heart-frame">
+            <img src="Logo stopcell.jpeg" alt="StopCell Logo" class="heart-image">
         </div>
-        <h1 class="slogan">LA DIFERENCIA EN ACCESORIOS Y CELULARES</h1>
-        <button class="enter-btn" onclick="enterStore()">ENTRAR A LA TIENDA</button>
+        <div class="heart-glow"></div>
     </div>
+
+    <div class="text-group">
+        <p class="slogan-valentine"> > Feliz Día Y Mes Del Amor Y La Amistad...</p>
+        <h1 class="main-logo-mini">STOP<span class="red">CELL</span></h1>
+    </div>
+
+    <button id="enter-button" class="enter-btn">ACCEDER AL SISTEMA</button>
 </div>
     <div id="loader">
         <div class="scanner"></div>
@@ -43,6 +48,7 @@
                 <button class="nav-link" data-page="xiaomi">XIAOMI</button>
                 <button class="nav-link" data-page="apple">APPLE</button>
                 <button class="nav-link" data-page="hogar">HOGAR</button>
+                <button class="nav-link" onclick="showSection('tablets')">Tablets</button>
             </nav>
             <div class="nav-icons">
                 <div class="cart-btn">
@@ -125,14 +131,6 @@
                 <p>Calidad premium a precio justo.</p>
             </div>
             <div class="product-grid">
-                <article class="card">
-                    <div class="img-container"><img src="Xiaomi.jpeg" alt="Xiaomi Tablet"></div>
-                    <div class="info">
-                        <h3>Xiaomi Tablet</h3>
-                        <p class="price">$4,990</p>
-                        <button class="buy-now">COMPRAR</button>
-                    </div>
-                </article>
                 <article class="card">
                     <div class="img-container"><img src="Xiaomi Redmi15.jpeg" alt="Xiaomi Redmi15"></div>
                     <div class="info">
@@ -278,6 +276,23 @@
             </article>
             </div>
         </section>
+        <section id="tablets" class="brand-section">
+    <div class="hero-banner">
+        <h2>POWER <span class="red">TABLETS</span></h2>
+        <p>RENDIMIENTO SIN LÍMITES</p>
+    </div>
+    
+    <div class="product-grid">
+        <div class="card">
+            <div class="img-container">
+                <img src="Xiaomi.jpeg" alt="ONN Tablet">
+            </div>
+            <h3>ONN Table</h3>
+            <div class="price">4,990</div>
+            <button class="buy-now">Comprar Ahora</button>
+        </div>
+        </div>
+</section>
         <section id="hogar" class="brand-section">
     <div class="hero-banner" style="background: linear-gradient(45deg, #0f2027, #203a43, #2c5364);">
         <h2>AIR & VISION</h2>
@@ -362,22 +377,26 @@
     </footer>
 
     <script src="script.js"></script><script>
-console.log(
-    "%c STOPCELL %c SISTEMA OPERATIVO ACTIVO %c",
-    "background: #ff0000; color: #ffffff; font-family: 'Orbitron', sans-serif; font-size: 30px; font-weight: bold; padding: 10px 20px; border-radius: 5px;",
-    "background: #1a1a1a; color: #00ff00; font-family: monospace; font-size: 14px; padding: 10px;",
-    "background: transparent;"
-);
+document.addEventListener('DOMContentLoaded', function() {
+    const btn = document.getElementById('enter-button');
+    const screen = document.getElementById('welcome-screen');
 
-console.log(
-    "%c [!] ADVERTENCIA: Accediendo a tecnología de última generación... \n [!] ESTADO: Conexión segura establecida. \n [!] MODO: Ventas Premium activado.",
-    "color: #ff0000; font-family: monospace; font-size: 12px; font-weight: bold;"
-);
+    if (btn && screen) {
+        btn.onclick = function() {
+            // 1. Iniciamos el desvanecimiento
+            screen.style.transition = "opacity 0.8s ease, visibility 0.8s";
+            screen.style.opacity = "0";
+            screen.style.visibility = "hidden";
 
-console.log(
-    "%c > Bienvenido a la red STOPCELL. \n > ¿Buscando el equipo perfecto? \n > Contacto directo: WhatsApp Disponible.",
-    "color: #888888; font-family: monospace; font-size: 12px;"
-);
+            // 2. Lo eliminamos del código para que la página sea rápida
+            setTimeout(() => {
+                screen.remove();
+            }, 800);
+        };
+    } else {
+        console.error("No se encontró el botón o la pantalla de inicio.");
+    }
+});
 </script>
 </body>
 </html>

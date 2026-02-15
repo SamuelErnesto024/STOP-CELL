@@ -143,3 +143,24 @@ function enterStore() {
         screen.style.display = 'none';
     }, 800);
 }
+function showSection(sectionId) {
+    // 1. Oculta todas las secciones
+    const sections = document.querySelectorAll('.brand-section');
+    sections.forEach(section => {
+        section.classList.remove('active');
+        section.style.display = 'none'; // Asegura que no ocupen espacio
+    });
+
+    // 2. Muestra la sección que seleccionaste
+    const activeSection = document.getElementById(sectionId);
+    if (activeSection) {
+        activeSection.classList.add('active');
+        activeSection.style.display = 'block'; // La hace visible
+    }
+
+    // 3. Cambia el estado del botón en el menú
+    const links = document.querySelectorAll('.nav-link');
+    links.forEach(link => link.classList.remove('active'));
+    // Busca el botón que tiene el onclick con ese sectionId
+    event.currentTarget.classList.add('active');
+}
