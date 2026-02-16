@@ -138,29 +138,67 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 function enterStore() {
     const screen = document.getElementById('welcome-screen');
-    screen.style.opacity = '0';
-    setTimeout(() => {
-        screen.style.display = 'none';
-    }, 800);
+    const navbar = document.querySelector('.navbar');
+
+    if (screen) {
+        screen.style.opacity = '0';
+        
+        setTimeout(() => {
+            screen.remove(); // Elimina el corazón para que no estorbe más
+
+            if (navbar) {
+                // Hacemos aparecer el menú que estaba oculto en el CSS
+                navbar.style.setProperty('display', 'block', 'important');
+                
+                setTimeout(() => {
+                    navbar.style.opacity = '1';
+                    navbar.style.transition = 'opacity 0.5s ease';
+                }, 50);
+            }
+            
+            // Llama a la primera sección para que la página no inicie vacía
+            showSection('samsung'); 
+            
+        }, 800);
+    }
 }
 function showSection(sectionId) {
-    // 1. Oculta todas las secciones
-    const sections = document.querySelectorAll('.brand-section');
-    sections.forEach(section => {
-        section.classList.remove('active');
-        section.style.display = 'none'; // Asegura que no ocupen espacio
-    });
+    console.log("Cambiando a sección:", sectionId); // Para rastrear errores en consola
 
-    // 2. Muestra la sección que seleccionaste
-    const activeSection = document.getElementById(sectionId);
-    if (activeSection) {
-        activeSection.classList.add('active');
-        activeSection.style.display = 'block'; // La hace visible
+    try {
+        // 1. Seleccionamos TODAS las secciones de la página
+        const allSections = document.querySelectorAll('.brand-section');
+        
+        // 2. Limpieza total e inmediata
+        allSections.forEach(section => {
+            section.style.display = 'none';
+            section.classList.remove('active');
+            section.style.opacity = '0';
+            section.style.pointerEvents = 'none'; // Evita que bloqueen clics
+        });
+
+        // 3. Activamos la sección que el usuario pidió
+        const activeSection = document.getElementById(sectionId);
+        if (activeSection) {
+            activeSection.style.display = 'block';
+            // Forzamos un pequeño respiro para el navegador
+            setTimeout(() => {
+                activeSection.style.opacity = '1';
+                activeSection.classList.add('active');
+                activeSection.style.pointerEvents = 'auto';
+            }, 50);
+        }
+
+        // 4. Resetear los botones del menú para que visualmente se note el cambio
+        document.querySelectorAll('.nav-link').forEach(btn => btn.classList.remove('active'));
+        if (event && event.currentTarget) {
+            event.currentTarget.classList.add('active');
+        }
+
+        // 5. Subir al inicio (Vuelve a activar el scroll)
+        window.scrollTo({ top: 0, behavior: 'instant' });
+
+    } catch (error) {
+        console.error("Error en la navegación:", error);
     }
-
-    // 3. Cambia el estado del botón en el menú
-    const links = document.querySelectorAll('.nav-link');
-    links.forEach(link => link.classList.remove('active'));
-    // Busca el botón que tiene el onclick con ese sectionId
-    event.currentTarget.classList.add('active');
 }

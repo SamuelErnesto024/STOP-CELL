@@ -206,14 +206,11 @@ body {
 
 /* SECCIONES Y ANIMACIÓN DE DESVANECIMIENTO */
 .brand-section {
-    display: none;
-    padding: 150px 5% 80px;
-    min-height: 100vh;
+    display: none; /* Oculto por defecto */
     opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition: opacity 0.5s ease;
+    padding-top: 100px; /* Para que no lo tape la navbar */
 }
-
 .brand-section.active {
     display: block;
     opacity: 1;
@@ -661,6 +658,7 @@ body {
 #btn-top:hover {
     background-color: #000;
 }
+/* La pantalla de inicio debe tener el valor más alto de todos */
 #welcome-screen {
     position: fixed;
     top: 0;
@@ -668,12 +666,21 @@ body {
     width: 100%;
     height: 100vh;
     background: #000;
-    display: flex;          /* Activa el modo flexible */
-    flex-direction: column; /* Pone los elementos uno debajo de otro */
-    justify-content: center;/* Centra verticalmente */
-    align-items: center;    /* Centra horizontalmente */
-    z-index: 99999;
-    text-align: center;     /* Asegura que el texto interno esté centrado */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 999999; /* <--- Asegúrate de que sea este valor gigante */
+    visibility: visible;
+}
+
+/* El menú debe estar por debajo del Welcome Screen al inicio */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100000; /* <--- Menor que el Welcome Screen */
+    /* OPCIONAL: Si aún se ve, añade opacity: 0 aquí */
 }
 
 .logo-container { position: relative; animation: pulse 2s infinite; }
@@ -1047,4 +1054,37 @@ body::after {
     z-index: -1;
     animation: hearts-fall 20s linear infinite;
     will-change: transform;
+}
+.brand-section {
+    position: relative;
+    z-index: 1; /* Nivel base */
+}
+
+.brand-section.active {
+    z-index: 10; /* La sección activa se pone al frente */
+}
+.brand-section {
+    display: none;
+    opacity: 0;
+    pointer-events: none; /* Bloquea clics si es invisible */
+    transition: opacity 0.4s ease;
+}
+
+.brand-section.active {
+    display: block !important;
+    opacity: 1;
+    pointer-events: auto; /* Permite clics solo cuando está activa */
+}
+.navbar {
+    z-index: 999999 !important; /* El nivel más alto posible */
+    position: fixed;
+}
+
+.brand-section {
+    position: relative;
+    z-index: 1;
+}
+
+.brand-section.active {
+    z-index: 100;
 }
